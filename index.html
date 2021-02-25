@@ -6,30 +6,56 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand navLinks" href="#" data-screen="home">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" aria-current="page" href="#">Filter</a>-->
+<!--                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Filter</a>
+                    <a class="nav-link navLinks" href="#" data-screen="filter">Filter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Data</a>
+                    <a class="nav-link navLinks" href="#" data-screen="data">Data</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Map</a>
+                    <a class="nav-link navLinks" href="#" data-screen="map">Map</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link navLinks" href="#" data-screen="about">About</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<div id="page-content" class="container-fluid">
+    <h4 class="mt-4 ml-5">
+        App Description
+    </h4>
+    <div style="line-height: 30px">
+        A Single-Page App that allows users to search for Chicago City-Owned Land Inventory data. <br>
+        API: <a href="https://data.cityofchicago.org/resource/aksk-kvfp.json">https://data.cityofchicago.org/resource/aksk-kvfp.json</a>
+    </div>
+    <br/>
+    <h4 class="mt-4 ml-5">
+        Instructions
+    </h4>
+    <div style="line-height: 30px">
+        <ul>
+            <li>Navigate to Filter page for filtering inventory to customize your preferences</li>
+            <li>Learn more about each listing using the Data Page</li>
+            <li>Get an overview of available listings in your area using the map page</li>
+            <li>Find more information about the app from the about page</li>
+        </ul>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="eventHandlers.js"></script>
 </body>
 </html>
