@@ -7,7 +7,7 @@ function data() {
             <div class="card m-2">
               <div class="card-body">
                <div>
-                    ${result[i]["community_area_name"] || "N/A"} - ${result[i]["pin"] || "N/A"}
+                    ${result[i]?.community_area_name || "N/A"} - ${result[i]["pin"] || "N/A"}
                 </div>
                 <div>
                     ${result[i]["address"] || "N/A"} - ${result[i]["sq_ft"] || "N/A"} sq-ft
@@ -33,7 +33,7 @@ function data() {
             <div class="card m-2">
               <div class="card-body">
                  <div>
-                    ${result[i]["community_area_name"] || "N/A"} - ${result[i]["pin"] || "N/A"}
+                    ${result[i]?.community_area_name || "N/A"} - ${result[i]["pin"] || "N/A"}
                 </div>
                 <div>
                     ${result[i]["address"] || "N/A"} - ${result[i]["sq_ft"] || "N/A"} sq-ft
