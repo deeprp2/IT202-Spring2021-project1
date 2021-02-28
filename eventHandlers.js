@@ -202,8 +202,7 @@ function about() {
 
 // Initialize and add the map
 function initMap() {
-    // The location of Uluru
-    // The map, centered at Uluru
+    let lastOpenedInfoWindow = null;
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10,
         center: new google.maps.LatLng({lat: 41.887, lng: -87.713})
@@ -218,6 +217,7 @@ function initMap() {
         let infoWindow = new google.maps.InfoWindow({
             content: `<div class="container">
                         <div>${item["community_area_name"] || "N/A"} - ${item["pin"] || "N/A"}</div>
+                        <div>${item["address"] || "N/A"} - ${item["sq_ft"] || "N/A"} sq-ft</div>
                      </div>
                      `
         })
@@ -228,10 +228,11 @@ function initMap() {
         });
 
         google.maps.event.addListener(marker, 'click', () => {
+            if (lastOpenedInfoWindow)
+                lastOpenedInfoWindow.close()
+
             infoWindow.open(map, marker)
-        })
-        google.maps.event.addListener(map, 'click', () => {
-            infoWindow.close()
+            lastOpenedInfoWindow = infoWindow
         })
     })
 }
