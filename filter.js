@@ -4,7 +4,7 @@ function filter() {
             <form class="mt-5" id="filter-form">
               <div class="form-group pb-2">
                 <label for="zipcode" class="pb-1">Zipcode</label>
-                <input type="number" class="form-control" id="zipcode" placeholder="Enter Zip Code" maxlength="5" 
+                <input type="number" class="form-control" id="zipcode" placeholder="60624" maxlength="5" 
                     oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                     
                 <label for="community" class="pb-1 pt-3">Community</label>
