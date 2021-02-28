@@ -1,5 +1,5 @@
 let currentTab = null
-let inventory = []
+let inventory = null
 let offset = 20;
 let navAnchors = document.querySelectorAll(".navLinks")
 
@@ -17,6 +17,7 @@ navAnchors.forEach((item) => {
 
 window.onload = function () {
     getInventory()
+
     if (window.localStorage.getItem('currentTab') == null) {
         currentTab = navAnchors[0]
         window.localStorage.setItem('currentTab', 'home')
@@ -32,7 +33,7 @@ function getInventory() {
     fetch('https://data.cityofchicago.org/resource/aksk-kvfp.json')
         .then(response => response.json())
         .then(data => {
-            inventory = data
+            window.localStorage.setItem('list', JSON.stringify(data))
         })
 }
 

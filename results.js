@@ -1,7 +1,6 @@
 function data() {
     clearPageContent()
-    let result = JSON.parse(window.localStorage.getItem('list')) || inventory
-
+    let result = JSON.parse(window.localStorage.getItem('list'))
     for (let i = 0; i < offset; i++) {
         document.getElementById('page-content').innerHTML += `
             <div class="card m-2">
