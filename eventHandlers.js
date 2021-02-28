@@ -3,6 +3,7 @@ let inventory = []
 let offset = 20;
 let navAnchors = document.querySelectorAll(".navLinks")
 
+
 navAnchors.forEach((item) => {
     item.addEventListener('click', function (event) {
         currentTab.classList.remove('active')
@@ -93,26 +94,15 @@ function filter() {
                 <input type="number" class="form-control" id="zipcode" placeholder="Enter Zip Code" maxlength="5" 
                     oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
               </div>
-                <a class="btn btn-info" role="button" onclick="data(document.querySelector('#filter-form'))">Submit</a>
+                <a class="btn btn-info" role="button" onclick="setFilteredList(document.querySelector('#filter-form'))">Submit</a>
             </form>
         </div>
     `
 }
 
-function data(data) {
+function data() {
     clearPageContent()
-    let result
-
-    if (data) {
-        let zipCode = data.querySelector("#zipcode").value
-
-        result = inventory.filter(function (x) {
-            if (parseInt(x.zip_code) == zipCode)
-                return x
-        })
-    } else {
-        result = inventory
-    }
+    let result = JSON.parse(window.localStorage.getItem('list')) || inventory
 
     for (let i = 0; i < offset; i++) {
         document.getElementById('page-content').innerHTML += `
@@ -160,6 +150,23 @@ function data(data) {
     })
 }
 
+function setFilteredList(data) {
+    let result
+
+    if (data) {
+        let zipCode = data.querySelector("#zipcode").value
+
+        result = inventory.filter(function (x) {
+            if (parseInt(x.zip_code) == zipCode)
+                return x
+        })
+    } else {
+        result = inventory
+    }
+
+    window.localStorage.setItem('list', JSON.stringify(result))
+}
+
 function addLoadMoreButton() {
     let btn = document.createElement("btn")
     btn.classList.add("btn")
@@ -196,20 +203,37 @@ function about() {
 // Initialize and add the map
 function initMap() {
     // The location of Uluru
-    const uluru = { lat: 41.878, lng: 87.629 };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: uluru
+        zoom: 10,
+        center: new google.maps.LatLng({lat: 41.887, lng: -87.713})
     });
-    // The marker, positioned at Uluru
-    const marker = new google.maps.Marker({
-        position: uluru,
-        map: map,
-    },
-    {
-        position: {lat: 41.887, lng: -87.713}
-    });
+
+    let list = JSON.parse(window.localStorage.getItem('list')) || []
+
+    list.forEach((item) => {
+        let lat = parseFloat(item.location.latitude)
+        let lng = parseFloat(item.location.longitude)
+
+        let infoWindow = new google.maps.InfoWindow({
+            content: `<div class="container">
+                        <div>${item["community_area_name"] || "N/A"} - ${item["pin"] || "N/A"}</div>
+                     </div>
+                     `
+        })
+
+        const marker = new google.maps.Marker({
+            position: {lat, lng},
+            map
+        });
+
+        google.maps.event.addListener(marker, 'click', () => {
+            infoWindow.open(map, marker)
+        })
+        google.maps.event.addListener(map, 'click', () => {
+            infoWindow.close()
+        })
+    })
 }
 
 function map() {
