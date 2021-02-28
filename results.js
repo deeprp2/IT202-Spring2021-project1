@@ -21,8 +21,8 @@ function data() {
         document.body.removeChild(document.getElementById('load-more'))
         let index = offset + 1;
 
-        if (offset + 20 > inventory.length) {
-            offset = inventory.length - offset
+        if (offset + 20 > result.length) {
+            offset = result.length - offset
         } else {
             offset += 20;
         }
