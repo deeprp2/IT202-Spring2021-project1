@@ -6,7 +6,11 @@ function initMap() {
         center: new google.maps.LatLng({lat: 41.887, lng: -87.713})
     });
 
-    let list = JSON.parse(window.localStorage.getItem('list'))
+    let list = JSON.parse(window.localStorage.getItem('filteredList'))
+
+    if (!list) {
+        list = JSON.parse(window.localStorage.getItem('list'))
+    }
 
     list.forEach((item) => {
         if (item.location) {

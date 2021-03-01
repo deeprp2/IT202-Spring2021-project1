@@ -22,10 +22,9 @@ function filter() {
 }
 
 function setFilteredList(data) {
-    let result
     getInventory()
+    let result
     let list = JSON.parse(window.localStorage.getItem('list'))
-
     if (data) {
         let zipCode = parseInt(data.querySelector("#zipcode").value)
         let communityName = data.querySelector('#community').value?.toUpperCase()
@@ -35,12 +34,13 @@ function setFilteredList(data) {
             if (parseInt(x.zip_code) == zipCode || x.community_area_name == communityName || x.ward == ward)
                 return x
         })
+
+        if (result.length === 0)
+            result = list
+
     } else {
         result = list
     }
 
-    if (result.length === 0)
-        result = list
-
-    window.localStorage.setItem('list', JSON.stringify(result))
+    window.localStorage.setItem('filteredList', JSON.stringify(result))
 }
