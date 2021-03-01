@@ -1,5 +1,4 @@
 let currentTab = null
-let inventory = null
 let offset = 20;
 let navAnchors = document.querySelectorAll(".navLinks")
 

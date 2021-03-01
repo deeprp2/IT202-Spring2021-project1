@@ -6,32 +6,34 @@ function initMap() {
         center: new google.maps.LatLng({lat: 41.887, lng: -87.713})
     });
 
-    let list = JSON.parse(window.localStorage.getItem('list')) || inventory
+    let list = JSON.parse(window.localStorage.getItem('list'))
 
     list.forEach((item) => {
-        let lat = parseFloat(item.location.latitude)
-        let lng = parseFloat(item.location.longitude)
+        if (item.location) {
+            let lat = parseFloat(item?.location?.latitude)
+            let lng = parseFloat(item?.location?.longitude)
 
-        let infoWindow = new google.maps.InfoWindow({
-            content: `<div class="container">
+            let infoWindow = new google.maps.InfoWindow({
+                content: `<div class="container">
                         <div>${item["community_area_name"] || "N/A"} - ${item["pin"] || "N/A"}</div>
                         <div>${item["address"] || "N/A"} - ${item["sq_ft"] || "N/A"} sq-ft</div>
                      </div>
                      `
-        })
+            })
 
-        const marker = new google.maps.Marker({
-            position: {lat, lng},
-            map
-        });
+            const marker = new google.maps.Marker({
+                position: {lat, lng},
+                map
+            });
 
-        google.maps.event.addListener(marker, 'click', () => {
-            if (lastOpenedInfoWindow)
-                lastOpenedInfoWindow.close()
+            google.maps.event.addListener(marker, 'click', () => {
+                if (lastOpenedInfoWindow)
+                    lastOpenedInfoWindow.close()
 
-            infoWindow.open(map, marker)
-            lastOpenedInfoWindow = infoWindow
-        })
+                infoWindow.open(map, marker)
+                lastOpenedInfoWindow = infoWindow
+            })
+        }
     })
 }
 

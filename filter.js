@@ -23,23 +23,24 @@ function filter() {
 
 function setFilteredList(data) {
     let result
+    getInventory()
+    let list = JSON.parse(window.localStorage.getItem('list'))
 
     if (data) {
         let zipCode = parseInt(data.querySelector("#zipcode").value)
         let communityName = data.querySelector('#community').value?.toUpperCase()
         let ward = parseInt(data.querySelector("#ward").value)
 
-        result = inventory.filter(function (x) {
-            if (parseInt(x.zip_code) == zipCode)
-                return x
-            else if (x.community_area_name == communityName)
-                return x
-            else if (x.ward == ward)
+        result = list.filter(function (x) {
+            if (parseInt(x.zip_code) == zipCode || x.community_area_name == communityName || x.ward == ward)
                 return x
         })
     } else {
-        result = inventory
+        result = list
     }
+
+    if (result.length === 0)
+        result = list
 
     window.localStorage.setItem('list', JSON.stringify(result))
 }
